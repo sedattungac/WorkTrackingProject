@@ -1,0 +1,167 @@
+﻿@using EntityLayer.Concrete
+@model List<Service>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_TemplateLayout.cshtml";
+}
+
+<div class="col-12">
+    <div class="float-left">
+        <h6 class="mb-0 text-uppercase ">HİZMET LİSTESİ</h6>
+    </div>
+
+</div>
+<hr />
+<div class="card">
+    <div class="card-header">
+        <button type="button" class="btn btn-primary float-right" data-bs-toggle="modal" data-bs-target="#examplePrimaryModal"> Yeni Hizmet</button>
+
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table id="example2" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Hizmet Kodu</th>
+                        <th>Açıklama</th>
+                        <th>KDV Oranı</th>
+                        <th>Sil</th>
+                        <th>Düzenle</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Code</td>
+                            <td>@item.Definition</td>
+                            <td>@item.Vatrate</td>
+                            <td><a href="/Service/Delete/@item.ServiceId" class="btn btn-danger btn-sm">Sil</a></td>
+                            <td><a href="/Service/Edit/@item.ServiceId" class="btn btn-warning btn-sm">Düzenle</a></td>
+                        </tr>
+                    }
+
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Hizmet Kodu</th>
+                        <th>Açıklama</th>
+                        <th>KDV Oranı</th>
+                        <th>Sil</th>
+                        <th>Düzenle</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+@foreach (var item in Model)
+{
+    @using (Html.BeginForm("Create", "Service", FormMethod.Post))
+    {
+        <div class="col">
+            <!-- Button trigger modal -->
+            <!-- Modal -->
+            <div class="modal fade" id="examplePrimaryModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Hizmet Ekle</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <label>Hizmet Kodu</label>
+                            <input type="text" id="Code" name="Code" placeholder="" class="form-control" />
+                            <br />
+                            <label>Açıklama</label>
+                            <input type="text" id="Definition" name="Definition" placeholder="" class="form-control" />
+                            <br />
+                            <label>KDV Oranı %</label>
+                            <input type="text" id="Email" name="Vatrate" placeholder="" class="form-control" />
+                            <br />
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Geri Dön</button>
+                            @*<button type="button" class="btn btn-dark">Save changes</button>*@
+                            <input type="submit" name="Ekle" value="Ekle" class="btn btn-success" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    @using (Html.BeginForm("Edit", "Service", new { id = @item.ServiceId }))
+    {
+        <div class="col">
+            <!-- Button trigger modal -->
+            <!-- Modal -->
+            <div class="modal fade" id="exampleWarningModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Kullanıcı Düzenle</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <label>Hizmet Kodu</label>
+                            <input type="text" id="Code" name="Code" placeholder="" class="form-control" />
+                            <br />
+                            <label>Açıklama</label>
+                            <input type="text" id="Definition" name="Definition" placeholder="" class="form-control" />
+                            <br />
+                            <label>KDV Oranı %</label>
+                            <input type="text" id="Email" name="Vatrate" placeholder="" class="form-control" />
+                            <br />
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Geri Dön</button>
+                            <input type="submit" name="Güncelle" value="Güncelle" class="btn btn-success" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    }
+
+    @using (Html.BeginForm("Delete", "Service", new { id = @item.ServiceId }))
+    {
+        <div class="col">
+            <!-- Button trigger modal -->
+            <!-- Modal -->
+            <div class="modal fade" id="exampleDangerModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Hizmet Silme</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Silmek istiyor musunuz?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Geri Dön</button>
+                            <a href="/Service/Delete/@item.ServiceId" name="Sil" value="Sil" class="btn btn-success">Sil</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    }
+
+
+}
+
+
+
+
+

@@ -1,0 +1,33 @@
+﻿@model EntityLayer.Concrete.UserType
+@using (Html.BeginForm("Edit", "UserType", FormMethod.Post))
+{
+    <div class="col">
+        <!-- Button trigger modal -->
+        <!-- Modal -->
+        <div class="modal fade" id="exampleWarningModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Departman Düzenle</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <label>Departman Adı</label>
+                        <input type="text" id="TypeName" asp-for="TypeName" name="TypeName" placeholder="" class="form-control" />
+                        <div style="visibility:hidden;">
+                            <input type="text" id="UserTypeId" asp-for="UserTypeId" name="UserTypeId" placeholder="" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Geri Dön</button>
+                        <input type="submit" name="Güncelle" value="Güncelle" class="btn btn-success" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+}
